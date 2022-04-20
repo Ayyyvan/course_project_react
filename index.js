@@ -3,9 +3,15 @@ const config = require('config')
 const mongoose = require('mongoose')
 const PORT = process.env.PORT || config.get('port')
 const mongoUri = process.env.MONGO_URI || config.get('mongoUri')
+const path = require('path')
+const publicPath = path.join(__dirname, "client", "public")
 const app = express()
 
 app.use(express.json({ extended: true }))
+app.use(express.static(publicPath))
+app.get('*', (req, res) => {
+	res.sendFile(path.join(publicPath, 'index.html'));
+});
 app.use('/api/auth', require('./routes/auth.routes'))// /api/auth используется как префикс, из файла берем все роуты
 
 async function start(){
@@ -13,42 +19,6 @@ async function start(){
 		await mongoose.connect(mongoUri, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
-		})
-
-		app.get('/', (req, res)=>{
-			res.end(`
-				<div>
-					<nav>
-						<ul>
-							<li>
-								<a href="/">Home</a>
-							</li>
-							<li>
-								<a href="/about">About</a>
-							</li>		
-						</ul>
-					</nav>
-					<h1>Home page</h1>
-				</div>
-			`)
-		})
-		
-		app.get('/about', (req, res)=>{
-			res.end(`
-				<div>
-					<nav>
-						<ul>
-							<li>
-								<a href="/">Home</a>
-							</li>
-							<li>
-								<a href="/about">About</a>
-							</li>		
-						</ul>
-					</nav>
-					<h1>About page</h1>
-				</div>
-			`)
 		})
 
 		app.listen(PORT, () => {
