@@ -11,7 +11,9 @@ class authController{
 		try{
 			const errors = validationResult(req)
 
-			if(!errors.isEmpty){
+			console.log('Body: ', req.body)
+
+			if(!errors.isEmpty()){
 				return res.status(400).json({
 					errors: errors.array(),
 					message: 'Invalid registration data'

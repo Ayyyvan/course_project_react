@@ -5,6 +5,7 @@ const PORT = process.env.PORT || config.get('port')
 const mongoUri = process.env.MONGO_URI || config.get('mongoUri')
 const app = express()
 
+app.use(express.json({ extended: true }))
 app.use('/api/auth', require('./routes/auth.routes'))// /api/auth используется как префикс, из файла берем все роуты
 
 async function start(){
