@@ -11,6 +11,13 @@ app.use(express.json({ extended: true }))
 
 app.use('/api/auth', require('./routes/auth.routes'))// /api/auth используется как префикс, из файла берем все роуты
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(buildPath))
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(buildPath, "index.html"));
+  });
+}
+
 async function start(){
 	try{
 		await mongoose.connect(mongoUri, {
@@ -29,10 +36,3 @@ async function start(){
 	
 }
 start()
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(buildPath))
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(buildPath, "index.html"));
-  });
-}
