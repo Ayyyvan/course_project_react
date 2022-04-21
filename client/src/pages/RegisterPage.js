@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react"
 import { useHttp } from "../hooks/http.hook"
 import { useMessage } from "../hooks/message.hook"
 
-
 export const RegisterPage = () => {
 	const message = useMessage()
 	const { loading, error, request, clearError } = useHttp()
@@ -23,7 +22,7 @@ export const RegisterPage = () => {
 	useEffect(()=>{
 		message(error)
 		clearError()
-	}, [error, message])
+	}, [error, message, clearError])
 
 	return (
 		<div className="row">

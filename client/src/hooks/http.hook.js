@@ -12,6 +12,8 @@ export const useHttp = () => {
 				headers['Content-Type'] = 'application/json'
 			}
 
+			console.log('Body: ', body)
+
 			const response = await fetch(url, {method, body, headers}) 
 			const data = await response.json()
 

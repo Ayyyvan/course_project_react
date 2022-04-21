@@ -43,7 +43,7 @@ class authController{
 		try{
 			const errors = validationResult(req)
 
-			if(!errors.isEmpty){
+			if(!errors.isEmpty()){
 				return res.status(400).json({
 					errors: errors.array(),
 					message: 'Invalid login data'
@@ -51,12 +51,15 @@ class authController{
 			}
 
 			const {email, password} = req.body
+			
+			const user = await User.findOne({ email: email })
+			if(!user){
+				return res.status(400).json({ message: 'User not found'})
+			}
 
-			const user = await user.findOne({ email: email })
 			const isMatch = await bcrypt.compare(password, user.password)
-
-			if(!user || !isMatch){
-				return res.status(400).json({ message: 'Invalid login data' })
+			if(!isMatch){
+				return res.status(400).json({ message: 'Wrong password'})
 			}
 
 			const token = jwt.sign(
