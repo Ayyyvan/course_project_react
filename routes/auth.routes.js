@@ -8,7 +8,8 @@ router.post(
 	'/register',
 	[
 		check('email', 'Invalid email').isEmail(),
-		check('password', 'Minimal password length 8 characters ').isLength({min: 8})
+		check('password', 'Minimal password length 8 characters ').isLength({min: 8}),
+		check('username', 'Username field cannot be empty').notEmpty()
 	],
 	controller.register)
 
@@ -17,7 +18,7 @@ router.post(
 	'/login',
 	[
 		check('email', 'Enter correct email').normalizeEmail().isEmail(),
-		check('password', 'Enter password ').exists()
+		check('password', 'Password field cannot be empty').exists()
 	],
 	controller.login)
 

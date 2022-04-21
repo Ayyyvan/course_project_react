@@ -6,7 +6,7 @@ export const RegisterPage = () => {
 	const message = useMessage()
 	const { loading, error, request, clearError } = useHttp()
 	const [form, setForm] = useState({
-		email: '', password: ''
+		username: '', email: '', password: ''
 	})
 
 	const changeHandler = event => {
@@ -32,6 +32,14 @@ export const RegisterPage = () => {
 					<div className="card-content white-text">
 						<span className="card-title">Registration</span>
 						<div>
+							<div className="input-field">
+								<input 
+									id="username" 
+									type="text" 
+									name="username"  
+									onChange={changeHandler}/>
+								<label htmlFor="username">Username</label>
+							</div>
 							<div className="input-field">
 								<input 
 									id="email" 

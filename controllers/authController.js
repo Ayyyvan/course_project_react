@@ -19,7 +19,7 @@ class authController{
 				})
 			}
 
-			const {email, password} = req.body
+			const {email, password, username} = req.body
 
 			const candidate = await User.findOne({ email: email })
 
@@ -29,7 +29,7 @@ class authController{
 			
 			const hashedPassword = await bcrypt.hash(password, 12)
 			const userRole = await Role.findOne({value: "USER"})
-			const user = new User({ email: email, password: hashedPassword, roles: [userRole.value]})
+			const user = new User({ username: username, email: email, password: hashedPassword, roles: [userRole.value]})
 
 			await user.save()
 
