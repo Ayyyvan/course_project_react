@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET || config.get('jwtSecret')
 const { validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
+const Role = require('../models/Role')
 
 class authController{
 
@@ -27,7 +28,8 @@ class authController{
 			}
 			
 			const hashedPassword = await bcrypt.hash(password, 12)
-			const user = new User({ email: email, password: hashedPassword})
+			const userRole = await Role.findOne({value: "USER"})
+			const user = new User({ email: email, password: hashedPassword, roles: [userRole.value]})
 
 			await user.save()
 
