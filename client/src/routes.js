@@ -1,5 +1,6 @@
 import React from "react"
 import {Routes, Route, Navigate} from "react-router-dom"
+import { NotFound } from "./components/NotFound"
 import { AuthPage } from "./pages/AuthPage"
 import { HomePage } from "./pages/HomePage"
 import { RegisterPage } from "./pages/RegisterPage"
@@ -10,7 +11,7 @@ export const useRoutes = isAuthenticated => {
 		 	<Routes>
 				<Route path="/" element={<HomePage/>} />
 
-				<Route path="*" element={<Navigate to="/" replace/>} />
+				<Route path="*" element={<NotFound/>} />
 			</Routes>
 		 )
 	}
@@ -22,7 +23,7 @@ export const useRoutes = isAuthenticated => {
 
 			<Route path="/" element={<HomePage/>} />
 
-			<Route path="*" element={<Navigate to="/" replace/>} />
+			<Route path="*" element={<NotFound/>} />
 		</Routes>
 	)
 		
