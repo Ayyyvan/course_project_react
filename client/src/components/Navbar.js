@@ -19,8 +19,10 @@ export const Navbar = () => {
       <ul id="nav-mobile" class="right hide-on-med-and-down">
 				
         {!auth.isAuthenticated && <li><NavLink to={"/login"}>login</NavLink></li>}
-				{!auth.isAuthenticated && <li><NavLink to={"/register"}>register</NavLink></li>} 
+				{!auth.isAuthenticated && <li><NavLink to={"/register"}>register</NavLink></li>}
+				{auth.isAuthenticated && <li><a href="/create">Create</a></li>}
 				{auth.isAuthenticated && <li><a href="/" onClick={logoutHandler}>logout</a></li>}
+
       </ul>
     </div>
   </nav>
