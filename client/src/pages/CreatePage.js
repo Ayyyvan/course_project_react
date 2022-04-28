@@ -25,25 +25,29 @@ export const CreatePage = () => {
 	return (
 		<div className="row">
 			<div className="col s8 offset-s2" style={{paddingTop: '2rem'}}>
-				<div className="input-field">
-					<input 
-						id="name" 
-						type="text" 
-						name="name"  
-						onChange={changeHandler} />
-					<label htmlFor="name">Name of Collection</label>
-				</div>
+				<div class="card blue-grey darken-1">
+					<div class="card-content white-text">
+						<span class="card-title">Create new collection</span>
+						<div className="input-field">
+							<input 
+								id="name" 
+								type="text" 
+								name="name"
+								value={form.name}  
+								onChange={changeHandler} />
+							<label htmlFor="name">Name of Collection</label>
+						</div>
+						<div className="input-field">
+							<input 
+								id="description" 
+								type="text" 
+								name="description"
+								value={form.description}  
+								onChange={changeHandler} />
+							<label htmlFor="description">Description</label>
+						</div>
+					</div>
 
-				<div className="input-field">
-					<input 
-						id="description" 
-						type="text" 
-						name="description"  
-						onChange={changeHandler} />
-					<label htmlFor="description">Description</label>
-				</div>
-			</div>
-			
 					<div className="card-action">
 						<button 
 						className="btn yellow darken-4"
@@ -51,6 +55,8 @@ export const CreatePage = () => {
 							Create
 						</button>
 					</div>
+				</div>
+			</div>	
 		</div>
 	)
 }
