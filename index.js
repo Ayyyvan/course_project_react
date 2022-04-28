@@ -12,19 +12,19 @@ app.use(express.json({ extended: true }))
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/collection', require('./routes/collection.routes'))
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(buildPath))
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(buildPath, "index.html"));
-  });
-}
-
 async function start(){
 	try{
 		await mongoose.connect(mongoUri, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
+
+		if (process.env.NODE_ENV === "production") {
+			app.use(express.static(buildPath))
+			app.get("/*", (req, res) => {
+				res.sendFile(path.join(buildPath, "index.html"));
+			});
+		}
 
 		app.listen(PORT, () => {
 			console.log(`Server has been started on port ${PORT}...`)

@@ -14,9 +14,9 @@ export const Navbar = () => {
 
 	return(
 		<nav>
-    <div class="nav-wrapper blue-grey darken-1" style={{padding: '0 2rem'}}>
-      <a href="/" class="brand-logo">Project name</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <div className="nav-wrapper blue-grey darken-1" style={{padding: '0 2rem'}}>
+      <a href="/" className="brand-logo">Project name</a>
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
 				
         {!auth.isAuthenticated && <li><NavLink to={"/login"}>login</NavLink></li>}
 				{!auth.isAuthenticated && <li><NavLink to={"/register"}>register</NavLink></li>}
