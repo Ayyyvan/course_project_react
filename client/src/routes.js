@@ -27,6 +27,8 @@ export const useRoutes = isAuthenticated => {
 
 			<Route path="/register" element={<RegisterPage/>} />
 
+			<Route path="/collection/:id" element={<CollectionPage/>} />
+
 			<Route path="/" element={<HomePage/>} />
 
 			<Route path="*" element={<NotFound/>} />
