@@ -19,4 +19,6 @@ router.post(
 // /api/collection/
 router.get('/', controller.getAll)
 
+router.get('/:id', controller.getById)
+
 module.exports = router

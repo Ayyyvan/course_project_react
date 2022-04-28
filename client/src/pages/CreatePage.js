@@ -25,9 +25,9 @@ export const CreatePage = () => {
 	return (
 		<div className="row">
 			<div className="col s8 offset-s2" style={{paddingTop: '2rem'}}>
-				<div class="card blue-grey darken-1">
-					<div class="card-content white-text">
-						<span class="card-title">Create new collection</span>
+				<div className="card blue-grey darken-1">
+					<div className="card-content white-text">
+						<span className="card-title">Create new collection</span>
 						<div className="input-field">
 							<input 
 								id="name" 

@@ -26,7 +26,7 @@ class collectionController{
 
 	async getMine(req, res) {
 		try{
-			const collections = Collection.find({ owner: req.user.userId })
+			const collections = await Collection.find({ owner: req.user.userId })
 			res.json(collections)
 		} catch(e){
 			res.status(500).json({ message: 'Something wrong, please thy again' })
@@ -35,8 +35,16 @@ class collectionController{
 
 	async getAll(req, res) {
 		try{
-			const collections = Collection.find()
+			const collections = await Collection.find()
 			res.json(collections)
+		} catch(e){
+			res.status(500).json({ message: 'Something wrong, please thy again' })
+		}
+	}
+	async getById(req, res) {
+		try{
+			const collection = await Collection.findById(req.params.id)
+			res.json(collection)
 		} catch(e){
 			res.status(500).json({ message: 'Something wrong, please thy again' })
 		}
