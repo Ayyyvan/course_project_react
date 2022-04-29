@@ -1,5 +1,6 @@
 const Collection = require('../models/Collection')
 const {validationResult} = require('express-validator')
+const User = require('../models/User')
 
 
 class collectionController{
@@ -17,7 +18,7 @@ class collectionController{
 			const { name, description } = req.body
 			const collection = new Collection({name, description, owner: req.user.userId})
 			collection.save()
-			
+			await User.findByIdAndUpdate(req.user.userId, { $set:{ collections : collection._id} })
 			res.status(201).json({ collection, message: 'Collection has been created' })
 		} catch(e){
 			res.status(500).json({ message: 'Something wrong, please thy again' })
