@@ -21,10 +21,14 @@ class authController{
 
 			const {email, password, username} = req.body
 
-			const candidate = await User.findOne({ email: email })
+			const candidateEmail = await User.findOne({ email: email })
+			if (candidateEmail){
+				return res.status(400).json({ message: `email ${email} is already registered`})
+			}
 
-			if (candidate){
-				return res.status(400).json({ message: 'This user already exist'})
+			const candidateUsername = await User.findOne({ username: username })
+			if (candidateUsername){
+				return res.status(400).json({ message: `username ${username} is already registered`})
 			}
 			
 			const hashedPassword = await bcrypt.hash(password, 12)
@@ -56,7 +60,7 @@ class authController{
 			
 			const user = await User.findOne({ email: email })
 			if(!user){
-				return res.status(400).json({ message: 'User not found'})
+				return res.status(400).json({ message: `User ${email} not found`})
 			}
 
 			const isMatch = await bcrypt.compare(password, user.password)
@@ -65,9 +69,9 @@ class authController{
 			}
 
 			const token = jwt.sign(
-				{ userId: user.id},
+				{ userId: user.id, roles: user.roles },
 				jwtSecret,
-				{ expiresIn: '1h' }
+				{ expiresIn: '24h' }
 			)
 
 			res.json({ token, userId: user.id })
