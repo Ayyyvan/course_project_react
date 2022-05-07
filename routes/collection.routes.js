@@ -19,6 +19,7 @@ router.post(
 // /api/collection/
 router.get('/', controller.getAll)
 
+// /api/collection/:id
 router.get('/:id', controller.getById)
 
 module.exports = router

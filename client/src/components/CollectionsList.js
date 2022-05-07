@@ -12,7 +12,7 @@ export const CollectionsList = ({collections}) => {
         <thead>
           <tr>
               <th>Name of collection</th>
-              <th>Owner Id</th>
+              <th>Owner</th>
               <th>Open</th>
           </tr>
         </thead>

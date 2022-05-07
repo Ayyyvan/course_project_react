@@ -1,53 +1,52 @@
 const Collection = require('../models/Collection')
 const {validationResult} = require('express-validator')
 const User = require('../models/User')
+const collectionService = require('../service/collection-service')
+const ErrorDto = require('../dtos/error-dto')
 
 
 class collectionController{
 
-	async create(req, res) {
+	async create(req, res, next) {
 		try{
 			const errors = validationResult(req)
 			if(!errors.isEmpty){
-				return res.status(400).json({
-					errors: errors.array(),
-					message: 'Invalid data'
-				})
+				return new ErrorDto(400, 'Invalid data', errors.array())
 			}
 
 			const { name, description } = req.body
-			const collection = new Collection({name, description, owner: req.user.id})
-			collection.save()
-			await User.findByIdAndUpdate(req.user.id, { $set:{ collections : collection._id} })
-			res.status(201).json({ collection, message: 'Collection has been created' })
+			const { collection, user } = await collectionService.create(name, description, req.user.username)
+			
+			res.status(201).json({ collection, user, message: 'Collection has been created' })
 		} catch(e){
-			res.status(500).json({ message: 'Something wrong, please thy again' })
+			next(e)
 		}
 	}
 
-	async getMine(req, res) {
+
+	async getMine(req, res, next) {
 		try{
-			const collections = await Collection.find({ owner: req.user.userId })
+			const collections = await Collection.find({ owner: req.user.username })
 			res.json(collections)
 		} catch(e){
-			res.status(500).json({ message: 'Something wrong, please thy again' })
+			next(e)
 		}
 	}
 
-	async getAll(req, res) {
+	async getAll(req, res, next) {
 		try{
 			const collections = await Collection.find()
 			res.json(collections)
 		} catch(e){
-			res.status(500).json({ message: 'Something wrong, please thy again' })
+			next(e)
 		}
 	}
-	async getById(req, res) {
+	async getById(req, res, next) {
 		try{
 			const collection = await Collection.findById(req.params.id)
 			res.json(collection)
 		} catch(e){
-			res.status(500).json({ message: 'Something wrong, please thy again' })
+			next(e)
 		}
 	}
 }

@@ -4,7 +4,7 @@ export const CollectionCard = ({collection}) => {
 	return (
 	<div className="col s12 m7">
     <h2 className="header">"{collection.name}"</h2>
-			<p><b>Owner Id:</b> {collection.owner}</p>
+			<p><b>Owner: </b> {collection.owner}</p>
       <p><b>Created:</b> {new Date(collection.created).toLocaleDateString()}</p>
     <div className="card horizontal">
       <div className="card-stacked">

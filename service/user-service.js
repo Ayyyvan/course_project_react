@@ -26,7 +26,7 @@ class UserService {
 				password: hashedPassword, 
 				roles: [userRole.value]
 			})
-			const userDto = new UserDto(user) // id, email, roles
+			const userDto = new UserDto(user) // id, email, roles, username
 
 			const tokens = tokenService.generateTokens({...userDto})
 			await tokenService.saveToken(userDto.id, tokens.refreshToken)
@@ -44,12 +44,19 @@ class UserService {
 			if(!isMatch){
 				throw new ErrorDto(400, 'Wrong password')
 			}
-			const userDto = new UserDto(user) // id, email, roles
+			const userDto = new UserDto(user) // id, email, roles, username
 
 			const tokens = tokenService.generateTokens({...userDto})
 			await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
 			return {...tokens, ...userDto}
+	}
+
+	async addCollection(collection, username){
+		const user = await User.findOneAndUpdate(
+			{	username: username}, 
+			{ $set:{ collections : collection._id} })
+		return user
 	}
 }
 module.exports = new UserService()
