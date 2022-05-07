@@ -16,9 +16,9 @@ class collectionController{
 			}
 
 			const { name, description } = req.body
-			const collection = new Collection({name, description, owner: req.user.userId})
+			const collection = new Collection({name, description, owner: req.user.id})
 			collection.save()
-			await User.findByIdAndUpdate(req.user.userId, { $set:{ collections : collection._id} })
+			await User.findByIdAndUpdate(req.user.id, { $set:{ collections : collection._id} })
 			res.status(201).json({ collection, message: 'Collection has been created' })
 		} catch(e){
 			res.status(500).json({ message: 'Something wrong, please thy again' })

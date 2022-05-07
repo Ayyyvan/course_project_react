@@ -6,11 +6,12 @@ const mongoUri = process.env.MONGO_URI
 const path = require('path')
 const buildPath = path.join(__dirname, "client", "build")
 const app = express()
+const errorMiddleware = require('./middleware/error.middleware')
 
 app.use(express.json({ extended: true }))
-
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/collection', require('./routes/collection.routes'))
+app.use(errorMiddleware)
 
 async function start(){
 	try{
@@ -18,7 +19,7 @@ async function start(){
 			useNewUrlParser: true,
 			useUnifiedTopology: true
 		})
-
+		
 		if (process.env.NODE_ENV === "production") {
 			app.use(express.static(buildPath))
 			app.get("/*", (req, res) => {

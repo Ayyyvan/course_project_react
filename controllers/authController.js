@@ -1,84 +1,40 @@
-const User = require('../models/User')
 require('dotenv').config()
-const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.JWT_SECRET
 const { validationResult } = require('express-validator')
-const bcrypt = require('bcryptjs')
-const Role = require('../models/Role')
+const userService = require('../service/user-service')
+const ErrorDto = require('../dtos/error-dto')
 
 class authController{
 
-	async register(req, res) {
+	async register(req, res, next) {
 		try{
 			const errors = validationResult(req)
-
 			if(!errors.isEmpty()){
-				return res.status(400).json({
-					errors: errors.array(),
-					message: 'Invalid registration data'
-				})
+				return next(ErrorDto(400, 'Invalid registration data', errors.array()))
 			}
 
 			const {email, password, username} = req.body
-
-			const candidateEmail = await User.findOne({ email: email })
-			if (candidateEmail){
-				return res.status(400).json({ message: `email ${email} is already registered`})
-			}
-
-			const candidateUsername = await User.findOne({ username: username })
-			if (candidateUsername){
-				return res.status(400).json({ message: `username ${username} is already registered`})
-			}
+			const userData = await userService.registration(email, username, password)
 			
-			const hashedPassword = await bcrypt.hash(password, 12)
-			const userRole = await Role.findOne({value: "USER"})
-			const user = new User({ username: username, email: email, password: hashedPassword, roles: [userRole.value]})
-
-			await user.save()
-
-			res.status(201).json({ message: 'User has been registered'})
-
-
+			return res.json(userData)
 		} catch(e){
-			res.status(500).json({ message: 'Something wrong, please thy again' })
+			next(e)
 		}
 	}
 
-	async login(req, res) {
+	async login(req, res, next) {
 		try{
 			const errors = validationResult(req)
 
 			if(!errors.isEmpty()){
-				return res.status(400).json({
-					errors: errors.array(),
-					message: 'Invalid login data'
-				})
+				return next(ErrorDto(400, 'Invalid login data', errors.array()))
 			}
 
 			const {email, password} = req.body
+			const userData = await userService.login(email, password)
 			
-			const user = await User.findOne({ email: email })
-			if(!user){
-				return res.status(400).json({ message: `User ${email} not found`})
-			}
-
-			const isMatch = await bcrypt.compare(password, user.password)
-			if(!isMatch){
-				return res.status(400).json({ message: 'Wrong password'})
-			}
-
-			const token = jwt.sign(
-				{ userId: user.id, roles: user.roles },
-				jwtSecret,
-				{ expiresIn: '24h' }
-			)
-
-			res.json({ token, userId: user.id })
-
-			
+			res.json({ token: userData.accessToken, userId: userData.id })
 		} catch(e){
-			res.status(500).json({ message: 'Something wrong, please thy again' })
+			next(e)
 		}
 	}
 }
