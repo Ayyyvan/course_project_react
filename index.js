@@ -1,8 +1,8 @@
 const express = require('express')
-const config = require('config')
+require('dotenv').config()
 const mongoose = require('mongoose')
-const PORT = process.env.PORT || config.get('port')
-const mongoUri = process.env.MONGO_URI || config.get('mongoUri')
+const PORT = process.env.PORT
+const mongoUri = process.env.MONGO_URI
 const path = require('path')
 const buildPath = path.join(__dirname, "client", "build")
 const app = express()

@@ -1,7 +1,7 @@
 const User = require('../models/User')
-const config = require('config')
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.JWT_SECRET || config.get('jwtSecret')
+const jwtSecret = process.env.JWT_SECRET
 const { validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const Role = require('../models/Role')

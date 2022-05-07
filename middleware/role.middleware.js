@@ -1,6 +1,6 @@
-const config = require('config')
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const jwtSecret = process.env.JWT_SECRET || config.get('jwtSecret')
+const jwtSecret = process.env.JWT_SECRET
 /*
 Для установки доступа по роли включить middleware в роут
 
