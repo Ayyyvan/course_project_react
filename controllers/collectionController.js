@@ -16,13 +16,21 @@ class collectionController{
 
 			const { name, description } = req.body
 			const { collection, user } = await collectionService.create(name, description, req.user.username)
-			
+
 			res.status(201).json({ collection, user, message: 'Collection has been created' })
 		} catch(e){
 			next(e)
 		}
 	}
 
+	async delete(req, res, next){
+		try{
+			await collectionService.delete(req.params.id, req.user)
+			res.status(200).json({ message: 'Collection has been deleted'})
+		} catch(e){
+			next(e)
+		}
+	}
 
 	async getMine(req, res, next) {
 		try{
@@ -41,6 +49,7 @@ class collectionController{
 			next(e)
 		}
 	}
+	
 	async getById(req, res, next) {
 		try{
 			const collection = await Collection.findById(req.params.id)

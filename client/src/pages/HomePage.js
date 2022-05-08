@@ -24,7 +24,7 @@ export const HomePage = () => {
 
 	return (
 		<>
-		{!loading && <CollectionsList collections={collections}/>}
+		{!loading && <CollectionsList collections={collections} fetch={fetchCollections}/>}
 		</>
 	)
 }

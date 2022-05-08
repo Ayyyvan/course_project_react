@@ -16,6 +16,8 @@ router.post(
 	], 
 	controller.create)
 
+router.delete('/:id/delete', auth, controller.delete)
+
 // /api/collection/
 router.get('/', controller.getAll)
 

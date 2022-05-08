@@ -55,8 +55,26 @@ class UserService {
 	async addCollection(collection, username){
 		const user = await User.findOneAndUpdate(
 			{	username: username}, 
-			{ $set:{ collections : collection._id} })
+			{ $push:{ collections : collection._id} })
 		return user
+	}
+
+	async removeCollection(collectionId){
+		const updatedUser = await User.findOneAndUpdate(
+				{collections: collectionId}, 
+				{$pull: {collections : collectionId}}
+			)
+			return(updatedUser)
+	}
+
+	async isCollectionOwner(user, collectionId){
+		const owner = await User.exists({_id: user.id, collections: collectionId})
+		return owner ? true : false
+	}
+
+	async isAdmin(user){
+		const admin = await User.exists({_id: user.id, roles: 'ADMIN'})
+		return admin? true : false
 	}
 }
 module.exports = new UserService()
