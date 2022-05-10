@@ -9,12 +9,12 @@ router.post('/my', auth, controller.getMine)
 
 // /api/collection/create
 router.post(
-	'/create', 
-	[
-		auth, 
-		check('name', 'Field name cannot be empty').notEmpty()
-	], 
-	controller.create)
+  '/create', 
+  [
+    auth, 
+    check('name', 'Field name cannot be empty').notEmpty()
+  ], 
+  controller.create)
 
 router.delete('/:id/delete', auth, controller.delete)
 

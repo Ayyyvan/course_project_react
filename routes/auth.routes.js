@@ -5,22 +5,22 @@ const controller = require('../controllers/authController')
 
 // /api/auth/register
 router.post(
-	'/register',
-	[
-		check('email', 'Invalid email').isEmail(),
-		check('password', 'Minimal password length 8 characters ').isLength({min: 8}),
-		check('username', 'Username field cannot be empty').notEmpty()
-	],
-	controller.register)
+  '/register',
+  [
+    check('email', 'Invalid email').isEmail(),
+    check('password', 'Minimal password length 8 characters ').isLength({min: 8}),
+    check('username', 'Username field cannot be empty').notEmpty()
+  ],
+  controller.register)
 
 // /api/auth/login
 router.post(
-	'/login',
-	[
-		check('email', 'Enter correct email').normalizeEmail().isEmail(),
-		check('password', 'Password field cannot be empty').exists()
-	],
-	controller.login)
+  '/login',
+  [
+    check('email', 'Enter correct email').normalizeEmail().isEmail(),
+    check('password', 'Password field cannot be empty').exists()
+  ],
+  controller.login)
 
 router.post('/logout', controller.logout)
 

@@ -8,31 +8,31 @@ import { RegisterPage } from "./pages/RegisterPage"
 import { CollectionPage } from "./pages/CollectionPage"
 
 export const useRoutes = isAuthenticated => {
-	if(isAuthenticated){
-		 return (
-		 	<Routes>
-				<Route path="/" element={<HomePage/>} />
+  if(isAuthenticated){
+     return (
+       <Routes>
+        <Route path="/" element={<HomePage/>} />
 
-				<Route path="/create" element={<CreatePage/>} />
+        <Route path="/create" element={<CreatePage/>} />
 
-				<Route path="/collection/:id" element={<CollectionPage/>} />
+        <Route path="/collection/:id" element={<CollectionPage/>} />
 
-				<Route path="*" element={<NotFound/>} />
-			</Routes>
-		 )
-	}
-	return (
-		<Routes>
-			<Route path="/login" element={<AuthPage/>} />
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
+     )
+  }
+  return (
+    <Routes>
+      <Route path="/login" element={<AuthPage/>} />
 
-			<Route path="/register" element={<RegisterPage/>} />
+      <Route path="/register" element={<RegisterPage/>} />
 
-			<Route path="/collection/:id" element={<CollectionPage/>} />
+      <Route path="/collection/:id" element={<CollectionPage/>} />
 
-			<Route path="/" element={<HomePage/>} />
+      <Route path="/" element={<HomePage/>} />
 
-			<Route path="*" element={<NotFound/>} />
-		</Routes>
-	)
-		
+      <Route path="*" element={<NotFound/>} />
+    </Routes>
+  )
+    
 }

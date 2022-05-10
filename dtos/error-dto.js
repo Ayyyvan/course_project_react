@@ -1,10 +1,10 @@
 module.exports = class ErrorDto extends Error{
-	status
-	errors
-	
-	constructor(status, message, errors = []){
-		super(message)
-		this.status = status
-		this.errors = errors
-	}
+  status
+  errors
+  
+  constructor(status, message, errors = []){
+    super(message)
+    this.status = status
+    this.errors = errors
+  }
 }

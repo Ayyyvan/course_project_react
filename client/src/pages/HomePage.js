@@ -4,27 +4,27 @@ import { useHttp } from "../hooks/http.hook"
 import { CollectionsList } from "../components/CollectionsList"
 
 export const HomePage = () => {
-	const [collections, setCollections] = useState([])
-	const {loading, request} = useHttp()
+  const [collections, setCollections] = useState([])
+  const {loading, request} = useHttp()
 
-	const fetchCollections = useCallback(async () => {
-		try{
-			const fetched = await request('/api/collection', 'GET')
-			setCollections(fetched)
-		} catch(e){}
-	}, [request])
+  const fetchCollections = useCallback(async () => {
+    try{
+      const fetched = await request('/api/collection', 'GET')
+      setCollections(fetched)
+    } catch(e){}
+  }, [request])
 
-	useEffect(() => {
-		fetchCollections()
-	}, [fetchCollections])
+  useEffect(() => {
+    fetchCollections()
+  }, [fetchCollections])
 
-	if(loading){
-		return <Loader/>
-	}
+  if(loading){
+    return <Loader/>
+  }
 
-	return (
-		<>
-		{!loading && <CollectionsList collections={collections} fetch={fetchCollections}/>}
-		</>
-	)
+  return (
+    <>
+    {!loading && <CollectionsList collections={collections} fetch={fetchCollections}/>}
+    </>
+  )
 }

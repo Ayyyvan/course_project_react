@@ -6,31 +6,31 @@ import { useHttp } from "../hooks/http.hook"
 import { CollectionCard } from "../components/CollectionCard"
 
 export const CollectionPage = () => {
-	const {token} = useContext(AuthContext)
-	const {request, loading} = useHttp()
-	const [collection, setCollection] = useState(null)
-	const collectionId = useParams().id
+  const {token} = useContext(AuthContext)
+  const {request, loading} = useHttp()
+  const [collection, setCollection] = useState(null)
+  const collectionId = useParams().id
 
-	const getCollection = useCallback(async () => {
-		try{
-			const fetched = await request(`/api/collection/${collectionId}`, 'GET', null, { Authorization: `Bearer ${token}`})
-			setCollection(fetched)
-		} catch(e){
+  const getCollection = useCallback(async () => {
+    try{
+      const fetched = await request(`/api/collection/${collectionId}`, 'GET', null, { Authorization: `Bearer ${token}`})
+      setCollection(fetched)
+    } catch(e){
 
-		}
-	}, [token, collectionId, request])
+    }
+  }, [token, collectionId, request])
 
-	useEffect( () => {
-		getCollection()
-	}, [getCollection])
+  useEffect( () => {
+    getCollection()
+  }, [getCollection])
 
-	if(loading){
-		return <Loader />
-	}
+  if(loading){
+    return <Loader />
+  }
 
-	return (
-		<>
-			{ !loading && collection && <CollectionCard collection={collection}/>}
-		</>
-	)
+  return (
+    <>
+      { !loading && collection && <CollectionCard collection={collection}/>}
+    </>
+  )
 }
