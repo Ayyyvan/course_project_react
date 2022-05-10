@@ -22,4 +22,8 @@ router.post(
 	],
 	controller.login)
 
+router.post('/logout', controller.logout)
+
+router.get('/refresh', controller.refresh)
+
 module.exports = router

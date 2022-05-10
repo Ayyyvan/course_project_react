@@ -1,13 +1,16 @@
 import React, { useContext } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
+import { useHttp } from "../hooks/http.hook"
 
 export const Navbar = () => {
 	const navigate = useNavigate()
 	const auth = useContext(AuthContext)
+	const {request} = useHttp()
 
 	const logoutHandler = event => {
 		event.preventDefault()
+		request('/api/auth/logout', 'POST')
 		auth.logout()
 		navigate("/")
 	}

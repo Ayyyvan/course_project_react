@@ -52,6 +52,29 @@ class UserService {
 			return {...tokens, ...userDto}
 	}
 
+	async logout(refreshToken){
+		const token = tokenService.removeToken(refreshToken)
+		return token
+	}
+
+	async refresh(refreshToken){
+		if(!refreshToken){
+			throw ErrorDto(401, 'No authorization')
+		}
+		const userData = tokenService.validateRefreshToken(refreshToken)
+		const tokenFromDb = await tokenService.findRefreshToken(refreshToken)
+		if(!userData || !tokenFromDb){
+			throw ErrorDto(401, 'No authorization')
+		}
+		const user = User.findById(userData.id)
+		const userDto = new UserDto(user) // id, email, roles, username
+
+		const tokens = tokenService.generateTokens({...userDto})
+		await tokenService.saveToken(userDto.id, tokens.refreshToken)
+
+		return {...tokens, ...userDto}
+	}
+
 	async addCollection(collection, username){
 		const user = await User.findOneAndUpdate(
 			{	username: username}, 
