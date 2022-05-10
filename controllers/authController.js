@@ -9,7 +9,7 @@ class authController{
     try{
       const errors = validationResult(req)
       if(!errors.isEmpty()){
-        return next(ErrorDto(400, 'Invalid registration data', errors.array()))
+        throw new ErrorDto(400, 'Invalid registration data', errors.array())
       }
 
       const {email, password, username} = req.body
@@ -24,9 +24,8 @@ class authController{
   async login(req, res, next) {
     try{
       const errors = validationResult(req)
-
       if(!errors.isEmpty()){
-        return next(ErrorDto(400, 'Invalid login data', errors.array()))
+        throw new ErrorDto(400, 'Invalid login data', errors.array())
       }
 
       const {email, password} = req.body

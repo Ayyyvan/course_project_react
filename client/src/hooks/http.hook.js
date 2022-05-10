@@ -19,13 +19,14 @@ export const useHttp = () => {
         throw new Error(data.message || 'Something wrong')
       }
 
-      setLoading(false)
-
       return data
+
     } catch(e) {
-      setLoading(false)
       setError(e.message)
       throw e
+
+    } finally {
+      setLoading(false)
     }
   }, [])
 
