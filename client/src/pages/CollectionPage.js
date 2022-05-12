@@ -30,7 +30,7 @@ export const CollectionPage = () => {
 
   return (
     <>
-      { !loading && collection && <CollectionCard collection={collection}/>}
+      { !loading && collection && <CollectionCard collection={collection} getCollection={getCollection}/>}
     </>
   )
 }

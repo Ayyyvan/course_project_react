@@ -24,5 +24,23 @@ class CollectionService {
     await Collection.findByIdAndDelete(id)
     await userService.removeCollection(id)
   }
+
+	async addItem(id, item) {
+		const updatedCollection = await Collection.findByIdAndUpdate(id, {$push : {items: item._id}}, {new: true})
+		return updatedCollection
+	}
+
+	async removeItem(id, item){
+		const updatedCollection = await Collection.findByIdAndUpdate(id, {$pull: {items: item._id}}, {new: true})
+		return updatedCollection
+	}
+
+	async findById(id){
+		const collection = await Collection.findById(id)
+		if(!collection){
+			return null
+		}
+		return collection
+	}
 }
 module.exports = new CollectionService()
