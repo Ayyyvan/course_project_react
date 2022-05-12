@@ -75,6 +75,21 @@ class UserService {
     return {...tokens, ...userDto}
   }
 
+	async getById(userId){
+		const user = await User.findById(userId, {password: 0})
+		if(!user){
+			throw new ErrorDto(400, `User '${userId}' not found`)
+		}
+		return user
+	}
+
+	async getAll(){
+		const usersDto = new Array()
+		const users = await User.find({}, {password: 0})
+
+		return users
+	}
+
   async addCollection(collection, username){
     const user = await User.findOneAndUpdate(
       {	username: username}, 
