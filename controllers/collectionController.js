@@ -1,6 +1,5 @@
 const Collection = require('../models/Collection')
 const {validationResult} = require('express-validator')
-const User = require('../models/User')
 const collectionService = require('../service/collection-service')
 const ErrorDto = require('../dtos/error-dto')
 
