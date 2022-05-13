@@ -4,8 +4,8 @@ import { AuthContext } from "../context/AuthContext"
 import { useNavigate, useParams } from "react-router-dom"
 
 export const AddItem = () => {
-	const params = useParams()
-	const navigate = useNavigate()
+  const params = useParams()
+  const navigate = useNavigate()
   const auth = useContext(AuthContext)
   const { request } = useHttp()
   const [form, setForm] = useState({
@@ -23,7 +23,7 @@ export const AddItem = () => {
     } catch(e){}
   }
 
-	return (
+  return (
     <div className="row">
       <div className="col s8 offset-s2" style={{paddingTop: '2rem'}}>
         <div className="card blue-grey darken-1">
@@ -36,7 +36,7 @@ export const AddItem = () => {
                 name="name"
                 value={form.name}  
                 onChange={changeHandler} />
-              <label htmlFor="name">Name of Item for {params.id}</label>
+              <label htmlFor="name">Name of Item</label>
             </div>
           </div>
 

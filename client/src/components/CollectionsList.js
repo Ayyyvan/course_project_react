@@ -20,7 +20,7 @@ export const CollectionsList = ({collections, fetch}) => {
 
   const deleteHandler = async (collectionId) => {
     try{
-      await request(`/api/collection/${collectionId}/delete`, 'DELETE', null, {Authorization: `Bearer ${token}`})
+      await request(`/api/collection/${collectionId}`, 'DELETE', null, {Authorization: `Bearer ${token}`})
       fetch()
     } catch(e){}
   }
