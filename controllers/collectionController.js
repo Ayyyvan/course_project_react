@@ -35,7 +35,7 @@ class collectionController{
   async getMine(req, res, next) {
     try{
       const collections = await Collection.find({ owner: req.user.username })
-      res.json(collections)
+      res.status(200).json(collections)
     } catch(e){
       next(e)
     }

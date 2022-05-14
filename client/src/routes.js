@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage"
 import { RegisterPage } from "./pages/RegisterPage"
 import { CollectionPage } from "./pages/CollectionPage"
 import { AddItem } from "./components/AddItem"
+import { ProfilePage } from "./pages/ProfilePage"
 
 export const useRoutes = isAuthenticated => {
   if(isAuthenticated){
@@ -14,11 +15,13 @@ export const useRoutes = isAuthenticated => {
        <Routes>
         <Route path="/" element={<HomePage/>} />
 
+        <Route path="/profile" element={<ProfilePage/>}/>
+
         <Route path="/create" element={<CreatePage/>} />
 
         <Route path="/collection/:id" element={<CollectionPage/>} />
 
-				<Route path="/collection/:id/add" element={<AddItem/>} />
+        <Route path="/collection/:id/add" element={<AddItem/>} />
 
         <Route path="*" element={<NotFound/>} />
       </Routes>

@@ -5,7 +5,7 @@ const controller = require('../controllers/collectionController')
 const isAuthorized = require('../middleware/auth.middleware')
 
 // /api/collection/my
-router.post('/my', isAuthorized, controller.getMine)
+router.get('/my', isAuthorized, controller.getMine)
 
 // /api/collection/create
 router.post(

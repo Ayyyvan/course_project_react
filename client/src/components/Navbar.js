@@ -23,6 +23,7 @@ export const Navbar = () => {
         
         {!auth.isAuthenticated && <li><NavLink to={"/login"}>login</NavLink></li>}
         {!auth.isAuthenticated && <li><NavLink to={"/register"}>register</NavLink></li>}
+        {auth.isAuthenticated && <li><NavLink to={"/profile"}>Profile</NavLink></li>}
         {auth.isAuthenticated && <li><a href="/create">Create</a></li>}
         {auth.isAuthenticated && <li><a href="/" onClick={logoutHandler}>logout</a></li>}
 
