@@ -2,6 +2,7 @@ const Collection = require('../models/Collection')
 const {validationResult} = require('express-validator')
 const collectionService = require('../service/collection-service')
 const ErrorDto = require('../dtos/error-dto')
+const ItemService = require('../service/item-service')
 
 
 class collectionController{
@@ -51,8 +52,13 @@ class collectionController{
   
   async getById(req, res, next) {
     try{
-      const collection = await Collection.findById(req.params.id)
-      res.json(collection)
+      const collection = await collectionService.findById(req.params.id)
+      const items = new Array
+      for(const itemId of collection.items){
+        const item = await ItemService.getById(itemId)
+        items.push(item)
+      }
+      res.status(200).json({collection, items})
     } catch(e){
       next(e)
     }

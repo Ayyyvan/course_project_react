@@ -9,12 +9,14 @@ export const CollectionPage = () => {
   const {token} = useContext(AuthContext)
   const {request, loading} = useHttp()
   const [collection, setCollection] = useState(null)
+  const [collectionItems, setItems] = useState([])
   const collectionId = useParams().id
 
   const getCollection = useCallback(async () => {
     try{
-      const fetched = await request(`/api/collection/${collectionId}`, 'GET', null, { Authorization: `Bearer ${token}`})
-      setCollection(fetched)
+      const {collection, items} = await request(`/api/collection/${collectionId}`, 'GET', null, { Authorization: `Bearer ${token}`})
+      setCollection(collection)
+      setItems(items)
     } catch(e){
 
     }
@@ -30,7 +32,11 @@ export const CollectionPage = () => {
 
   return (
     <>
-      { !loading && collection && <CollectionCard collection={collection} getCollection={getCollection}/>}
+      { !loading && collection && <CollectionCard 
+      collection={collection} 
+      getCollection={getCollection}
+      items={collectionItems}
+      />}
     </>
   )
 }

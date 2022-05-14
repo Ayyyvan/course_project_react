@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import { useHttp } from "../hooks/http.hook"
+import { ItemCard } from "./ItemCard"
 
 
 export const CollectionCard = (props) => {
@@ -43,12 +44,11 @@ export const CollectionCard = (props) => {
         >Delete Collection
         </button>
       </li>
-        {props.collection.items.map(item => {
-          return(
-            <li key={item} className="collection-item">
-              Item {item} <button onClick={()=>{removeItemHandler(item)}}>Delete</button>
-            </li>
-          )
+        {props.items.map(item => {
+          return <ItemCard 
+          item={item}
+          removeItemHandler={removeItemHandler}
+          />
         })}
     </ul>
   </div>

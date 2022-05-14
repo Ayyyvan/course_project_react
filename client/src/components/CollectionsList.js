@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import { useMessage } from "../hooks/message.hook"
 
-export const CollectionsList = ({collections, fetch}) => {
+export const CollectionsList = (props) => {
   const {token} = useContext(AuthContext)
   const message = useMessage()
   const {request, error, clearError} = useHttp()
@@ -14,14 +14,14 @@ export const CollectionsList = ({collections, fetch}) => {
     clearError(error)
   }, [error, message, clearError])
 
-  if (!collections.length){
+  if (!props.collections.length){
     return <p className="center">No collection yet</p>
   }
 
   const deleteHandler = async (collectionId) => {
     try{
       await request(`/api/collection/${collectionId}`, 'DELETE', null, {Authorization: `Bearer ${token}`})
-      fetch()
+      props.fetch()
     } catch(e){}
   }
 
@@ -39,7 +39,7 @@ export const CollectionsList = ({collections, fetch}) => {
         </thead>
 
         <tbody>
-          { collections.map(collection => {
+          { props.collections.map(collection => {
             return(
               <tr key={collection._id}>
                 <td>{collection.name}</td>

@@ -19,7 +19,16 @@ class itemController{
     }
   }
   async getAll(req, res, next){}
-  async getById(req, res, next){}
+
+  async getById(req, res, next){
+    try{
+      const item = await itemService.getById(req.params.id)
+      res.status(200).json({item})
+    } catch (e){
+      next(e)
+    }
+  }
+
   async deleteById(req, res, next){
     try{
       const collection = await collectionService.findById(req.body.collection._id)
