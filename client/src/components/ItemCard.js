@@ -10,9 +10,11 @@ export const ItemCard = (props) => {
             </blockquote>
             <p>Created: {new Date(props.item.created).toLocaleDateString()}</p>
           </div>
-          <div class="card-action">
-            <button onClick={()=>{props.removeItemHandler(props.item._id)}}>Delete</button>
-          </div>
+					{props.removeItemHandler && 
+						<div class="card-action">
+							<button onClick={()=>{props.removeItemHandler(props.item._id)}}>Delete</button>
+						</div>
+					}
         </div>
       </div>
     </li>

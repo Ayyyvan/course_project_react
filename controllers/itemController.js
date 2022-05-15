@@ -18,7 +18,14 @@ class itemController{
       next(e)
     }
   }
-  async getAll(req, res, next){}
+  async getAll(req, res, next){
+		try{
+			const items = await itemService.getAll()
+			res.status(200).json(items)
+		} catch(e){
+			next(e)
+		}
+	}
 
   async getById(req, res, next){
     try{

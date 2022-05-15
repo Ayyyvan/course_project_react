@@ -21,5 +21,10 @@ class ItemService{
     const item = await Item.findById(itemId)
     return item
   }
+
+	async getAll(){
+		const items = await Item.find()
+		return items
+	}
 }
 module.exports = new ItemService()
