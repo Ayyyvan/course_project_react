@@ -3,18 +3,26 @@ const Item = require('../models/Item')
 const collectionService = require('./collection-service')
 
 class ItemService{
-  async create(itemName, collection){
-    const item = await Item.create({name: itemName, owner: collection._id})
-    const updatedCollection = await collectionService.addItem(collection._id, item)
+  async create(itemInfo, collection){
+    const item = await Item.create({
+      name: itemInfo.name, 
+      owner: collection._id,
+      author: itemInfo.author,
+      tags: itemInfo.tags
+    })
 
-    return {item, updatedCollection}
+    return {item}
   }
 
-  async delete(itemId, collection){
+  async delete(itemId){
     const deletedItem = await Item.findByIdAndDelete(itemId)
-    const updatedCollection = await collectionService.removeItem(collection.id, deletedItem)
     
     return {deletedItem, updatedCollection}
+  }
+
+  async deleteByCollectionId(collectionId){
+    const deletedItems = await Item.deleteMany({owner: collectionId})
+    return deletedItems
   }
 
   async getById(itemId){
@@ -22,9 +30,9 @@ class ItemService{
     return item
   }
 
-	async getAll(){
-		const items = await Item.find()
-		return items
-	}
+  async getAll(){
+    const items = await Item.find()
+    return items
+  }
 }
 module.exports = new ItemService()

@@ -9,7 +9,7 @@ export const AddItem = () => {
   const auth = useContext(AuthContext)
   const { request } = useHttp()
   const [form, setForm] = useState({
-    name: '', collectionId: params.id
+    name: '', collectionId: params.id, author: '', tags: []
   })
 
   const changeHandler = event => {
@@ -18,7 +18,7 @@ export const AddItem = () => {
 
   const createHandler = async () => {
     try{
-      const data = await request('/api/item/create', 'POST', {...form}, {Authorization: `Bearer ${auth.token}`})
+      const data = await request('/api/item/create', 'POST', {item: {...form}}, {Authorization: `Bearer ${auth.token}`})
       navigate(`/collection/${data.updatedCollection._id}`)
     } catch(e){}
   }
@@ -29,6 +29,7 @@ export const AddItem = () => {
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
             <span className="card-title">Add Item</span>
+
             <div className="input-field">
               <input 
                 id="name" 
@@ -38,6 +39,17 @@ export const AddItem = () => {
                 onChange={changeHandler} />
               <label htmlFor="name">Name of Item</label>
             </div>
+
+            <div className="input-field">
+              <input 
+                id="author" 
+                type="text" 
+                name="author"
+                value={form.author}  
+                onChange={changeHandler} />
+              <label htmlFor="author">Author</label>
+            </div>
+
           </div>
 
           <div className="card-action">

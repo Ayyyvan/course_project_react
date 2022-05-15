@@ -6,11 +6,12 @@ const ErrorDto = require('../dtos/error-dto')
 class itemController{
   async add(req, res, next){
     try{
-      const collection = await collectionService.findById(req.body.collectionId)
+      const collection = await collectionService.findById(req.body.item.collectionId)
       if(!collection){
         throw new ErrorDto(400, `Collection doesn't exist`)
       }
-      const { item, updatedCollection } = await itemService.create(req.body.name, collection)
+      const { item } = await itemService.create(req.body.item, collection)
+      const updatedCollection = await collectionService.addItem(collection._id, item)
 
       res.status(201).json({item, updatedCollection, message: 'Item has been created'})
 
@@ -19,13 +20,13 @@ class itemController{
     }
   }
   async getAll(req, res, next){
-		try{
-			const items = await itemService.getAll()
-			res.status(200).json(items)
-		} catch(e){
-			next(e)
-		}
-	}
+    try{
+      const items = await itemService.getAll()
+      res.status(200).json(items)
+    } catch(e){
+      next(e)
+    }
+  }
 
   async getById(req, res, next){
     try{
@@ -43,7 +44,8 @@ class itemController{
         throw new ErrorDto(400, `Collection doesn't exist`)
       }
 
-      const { deletedItem, updatedCollection } = await itemService.delete(req.params.id, collection)
+      const { deletedItem } = await itemService.delete(req.params.id)
+      const updatedCollection = await collectionService.removeItem(collection._id, deletedItem)
 
       res.status(200).json({deletedItem, updatedCollection, message: 'Item has been deleted'})
     } catch(e){

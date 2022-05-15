@@ -75,20 +75,20 @@ class UserService {
     return {...tokens, ...userDto}
   }
 
-	async getById(userId){
-		const user = await User.findById(userId, {password: 0})
-		if(!user){
-			throw new ErrorDto(400, `User '${userId}' not found`)
-		}
-		return user
-	}
+  async getById(userId){
+    const user = await User.findById(userId, {password: 0})
+    if(!user){
+      throw new ErrorDto(400, `User '${userId}' not found`)
+    }
+    return user
+  }
 
-	async getAll(){
-		const usersDto = new Array()
-		const users = await User.find({}, {password: 0})
+  async getAll(){
+    const usersDto = new Array()
+    const users = await User.find({}, {password: 0})
 
-		return users
-	}
+    return users
+  }
 
   async addCollection(collection, username){
     const user = await User.findOneAndUpdate(
@@ -113,6 +113,15 @@ class UserService {
   async isAdmin(user){
     const admin = await User.exists({_id: user.id, roles: 'ADMIN'})
     return admin? true : false
+  }
+
+  async isCanEdit(user, collectionId){
+    const isCollectionOwner = await this.isCollectionOwner(user, collectionId)
+    const isAdmin = await this.isAdmin(user)
+    if(isAdmin || isCollectionOwner){
+      return true
+    }
+    return false
   }
 }
 module.exports = new UserService()
