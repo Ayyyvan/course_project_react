@@ -30,8 +30,8 @@ export const AddItem = () => {
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
             <span className="card-title">
-						<FormattedMessage id="addItem.btn" defaultMessage="Add item"/>
-						</span>
+            <FormattedMessage id="addItem.btn" defaultMessage="Add item"/>
+            </span>
 
             <div className="input-field">
               <input 
@@ -41,8 +41,8 @@ export const AddItem = () => {
                 value={form.name}  
                 onChange={changeHandler} />
               <label htmlFor="name">
-								<FormattedMessage id="itemName" defaultMessage="Name of Item"/>
-							</label>
+                <FormattedMessage id="itemName" defaultMessage="Name of Item"/>
+              </label>
             </div>
 
             <div className="input-field">
@@ -53,8 +53,8 @@ export const AddItem = () => {
                 value={form.author}  
                 onChange={changeHandler} />
               <label htmlFor="author">
-							<FormattedMessage id="author" defaultMessage="Author"/>
-							</label>
+              <FormattedMessage id="author" defaultMessage="Author"/>
+              </label>
             </div>
 
           </div>

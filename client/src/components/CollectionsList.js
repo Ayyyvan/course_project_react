@@ -47,13 +47,13 @@ export const CollectionsList = (props) => {
                 <td>{collection.owner}</td>
                 <td>
                   <Link to={`/collection/${collection._id}`}>
-										<FormattedMessage id="open.btn" defaultMessage="Open"/>
-									</Link>
+                    <FormattedMessage id="open.btn" defaultMessage="Open"/>
+                  </Link>
                 </td>
                 <td>
                   <button onClick={()=>deleteHandler(collection._id)}>
-										<FormattedMessage id="delete.btn" defaultMessage="Delete"/>
-									</button>
+                    <FormattedMessage id="delete.btn" defaultMessage="Delete"/>
+                  </button>
                 </td>
               </tr>
             )

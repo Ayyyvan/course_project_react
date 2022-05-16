@@ -3,7 +3,6 @@ const { check } = require('express-validator')
 const router = Router()
 const controller = require('../controllers/authController')
 
-// /api/auth/register
 router.post(
   '/register',
   [
@@ -13,7 +12,7 @@ router.post(
   ],
   controller.register)
 
-// /api/auth/login
+
 router.post(
   '/login',
   [

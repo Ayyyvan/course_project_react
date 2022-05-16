@@ -38,13 +38,13 @@ export const CollectionCard = (props) => {
           onClick={()=>document.location =`/collection/${props.collection._id}/add`}
           disabled={loading}
         >
-					<FormattedMessage id="addItem.btn" defaultMessage="Add item"/>
+          <FormattedMessage id="addItem.btn" defaultMessage="Add item"/>
         </button>
         <button 
           onClick={()=>{deleteHandler(props.collection._id)}}
           disabled={loading}
         >
-					<FormattedMessage id="deleteCollection.btn" defaultMessage="Delete collection"/>
+          <FormattedMessage id="deleteCollection.btn" defaultMessage="Delete collection"/>
         </button>
       </li>
         {props.items.map(item => {

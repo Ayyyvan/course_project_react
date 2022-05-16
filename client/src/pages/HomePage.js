@@ -5,7 +5,7 @@ import { CollectionsList } from "../components/CollectionsList"
 import { ItemList } from "../components/ItemList"
 
 export const HomePage = () => {
-	const [items, setItems] = useState([])
+  const [items, setItems] = useState([])
   const [collections, setCollections] = useState([])
   const {loading, request} = useHttp()
 
@@ -16,7 +16,7 @@ export const HomePage = () => {
     } catch(e){}
   }, [request])
 
-	const fetchItems = useCallback(async () => {
+  const fetchItems = useCallback(async () => {
     try{
       const fetchedItems = await request('/api/item', 'GET')
       setItems(fetchedItems)
@@ -25,7 +25,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     fetchCollections()
-		fetchItems()
+    fetchItems()
   }, [fetchCollections, fetchItems])
 
   if(loading){
@@ -34,7 +34,7 @@ export const HomePage = () => {
 
   return (
     <>
-		{!loading && <ItemList items={items} fetchItems={fetchItems}/>}
+    {!loading && <ItemList items={items} fetchItems={fetchItems}/>}
     </>
   )
 }

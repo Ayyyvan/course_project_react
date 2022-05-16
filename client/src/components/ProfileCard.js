@@ -8,12 +8,12 @@ export const ProfileCard = (props) => {
     <ul className="collection with-header">
       <li className="collection-header">
         <h2 className="header">
-					<FormattedMessage
-						id="profile"
-						defaultMessage={`Profile "${props.user.username}"`}
-						values={{username: props.user.username}}
-					/>
-				</h2>
+          <FormattedMessage
+            id="profile"
+            defaultMessage={`Profile "${props.user.username}"`}
+            values={{username: props.user.username}}
+          />
+        </h2>
         <p><b>Id: </b> {props.user._id}</p>
         <p><b>Email: </b> {props.user.email}</p>
         <p><b>Roles: </b> {props.user.roles}</p>

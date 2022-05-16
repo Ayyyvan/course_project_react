@@ -4,12 +4,12 @@ export const ItemCard = (props) => {
   return(
       <div className="card horizontal ">
         <div className="card-stacked modal-trigger"
-					href={`#${props.item._id}`}
-					onClick={()=>{
-						var elems = document.querySelectorAll('.modal');
-						window.M.Modal.init(elems);
-					}}
-				>
+          href={`#${props.item._id}`}
+          onClick={()=>{
+            var elems = document.querySelectorAll('.modal');
+            window.M.Modal.init(elems);
+          }}
+        >
           <div className="card-content">
 
             <blockquote>
@@ -18,18 +18,18 @@ export const ItemCard = (props) => {
             </blockquote>
 
             <p>
-						<FormattedMessage id="created" defaultMessage="Created: "/> 
-							{new Date(props.item.created).toLocaleDateString()}
-						</p>
+            <FormattedMessage id="created" defaultMessage="Created: "/> 
+              {new Date(props.item.created).toLocaleDateString()}
+            </p>
 
           </div>
-					{props.removeItemHandler && 
-						<div className="card-action">
-							<button onClick={()=>{props.removeItemHandler(props.item._id)}}>
-							<FormattedMessage id="delete.btn" defaultMessage="Delete"/> 
-							</button>
-						</div>
-					}
+          {props.removeItemHandler && 
+            <div className="card-action">
+              <button onClick={()=>{props.removeItemHandler(props.item._id)}}>
+              <FormattedMessage id="delete.btn" defaultMessage="Delete"/> 
+              </button>
+            </div>
+          }
         </div>
       </div>
     

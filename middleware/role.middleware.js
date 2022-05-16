@@ -1,14 +1,6 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.JWT_SECRET
-/*
-Для установки доступа по роли включить middleware в роут
-
-пример: 
-const roleMiddleware = require('../middleware/role.middleware')
-...
-router.get('/', roleMiddleware(['USER']), controller.action)
-**/
 
 module.exports = function(roles) {
   return function(req, res, next) {

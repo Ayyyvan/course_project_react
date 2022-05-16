@@ -4,10 +4,8 @@ const router = Router()
 const controller = require('../controllers/collectionController')
 const isAuthorized = require('../middleware/auth.middleware')
 
-// /api/collection/my
 router.get('/my', isAuthorized, controller.getMine)
 
-// /api/collection/create
 router.post(
   '/create', 
   [
@@ -18,10 +16,8 @@ router.post(
 
 router.delete('/:id', isAuthorized, controller.delete)
 
-// /api/collection/
 router.get('/', controller.getAll)
 
-// /api/collection/:id
 router.get('/:id', controller.getById)
 
 module.exports = router
