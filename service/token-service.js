@@ -14,6 +14,7 @@ class TokenService{
       refreshToken
     }
   }
+	
   validateAccessToken(accessToken) {
     try{
       const userData = jwt.verify(accessToken, JWT_ACCESS_SECRET)

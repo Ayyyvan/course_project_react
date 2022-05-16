@@ -8,9 +8,7 @@ class ItemService{
       name: itemInfo.name, 
       owner: collection._id,
       author: itemInfo.author,
-      tags: itemInfo.tags
     })
-
     return {item}
   }
 
