@@ -1,3 +1,4 @@
+import {FormattedMessage} from "react-intl"
 export const RegistrationForm = (props) => {
   
   return (
@@ -5,7 +6,9 @@ export const RegistrationForm = (props) => {
       <div className="col s6 offset-s3">
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
-            <span className="card-title">Registration</span>
+            <span className="card-title">
+						<FormattedMessage id="registration" defaultMessage="Registration"/>
+						</span>
             <div>
               <div className="input-field">
                 <input 
@@ -13,7 +16,9 @@ export const RegistrationForm = (props) => {
                   type="text" 
                   name="username"  
                   onChange={props.changeHandler}/>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">
+								<FormattedMessage id="username" defaultMessage="Username"/>
+								</label>
               </div>
               <div className="input-field">
                 <input 
@@ -31,7 +36,9 @@ export const RegistrationForm = (props) => {
                   name="password" 
                   className="validate" 
                   onChange={props.changeHandler}/>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">
+								<FormattedMessage id="password" defaultMessage="Password"/>
+								</label>
               </div>
             </div>
           </div>
@@ -42,9 +49,11 @@ export const RegistrationForm = (props) => {
               onClick={props.registerHandler} 
               disabled={props.loading}
             >
-              Registrate
+              <FormattedMessage id="registrate.btn" defaultMessage="Registrate"/>
             </button>
-            <a href="/login" disabled={props.loading}>Already have an account?</a>
+            <a href="/login" disabled={props.loading}>
+							<FormattedMessage id="alreadyHaveAcc" defaultMessage="Already have an account?"/>
+						</a>
           </div>
         </div>
       </div>

@@ -1,10 +1,11 @@
 import { ItemCard } from "./ItemCard"
+import { FormattedMessage } from "react-intl"
 
 export const ItemList = (props) => {
 
 	return(
 		<ul className="collection with-header">
-			{!props.items.length && <p className="center">No Items yet</p>}
+			{!props.items.length && <p className="center"><FormattedMessage id="noItems.message" defaultMessage="No Items yet"/></p>}
 			{props.items.map(item => {
 				return(
 					<li key={item._id}  className="collection-item">
@@ -22,7 +23,9 @@ export const ItemList = (props) => {
 							</div>
 
 							<div className="modal-footer">
-								<a href="#!" className="modal-close waves-effect waves-green btn-flat">Nice</a>
+								<a href="#!" className="modal-close waves-effect waves-green btn-flat">
+									<FormattedMessage id="nice.message" defaultValue="Nice"/>
+								</a>
 							</div>
 
 						</div>

@@ -6,6 +6,7 @@ import { useAuth } from './hooks/auth.hook'
 import { AuthContext } from './context/AuthContext'
 import { Navbar } from './components/Navbar'
 import { Loader } from './components/Loader'
+import LanguageSwitcher from './components/LanguageSwitcher'
 
 function App() {
   const {token, login, logout, userId, ready} = useAuth()
@@ -17,16 +18,18 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{
-      token, login, logout, userId, isAuthenticated
-    }}>
-      <Router>
-        <Navbar/>
-        <div className='container'>
-          {routes}
-        </div>	
-      </Router>
-    </AuthContext.Provider>
+		<LanguageSwitcher>
+			<AuthContext.Provider value={{
+				token, login, logout, userId, isAuthenticated
+			}}>
+				<Router>
+					<Navbar/>
+					<div className='container'>
+						{routes}
+					</div>	
+				</Router>
+			</AuthContext.Provider>
+		</LanguageSwitcher>
   );
 }
 

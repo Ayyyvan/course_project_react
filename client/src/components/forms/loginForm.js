@@ -1,11 +1,14 @@
+import { FormattedMessage } from "react-intl"
+
 export const LoginForm = (props) => {
   return(
     <div className="row">
       <div className="col s6 offset-s3">
-        <h1>Project Name</h1>
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
-            <span className="card-title">Authorization</span>
+            <span className="card-title">
+						<FormattedMessage id="authorization" defaultMessage="Authorization"/>
+						</span>
             <div>
                 <div className="input-field">
                   <input 
@@ -23,7 +26,9 @@ export const LoginForm = (props) => {
                     name="password" 
                     value={props.form.password} 
                     onChange={props.changeHandler} />
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">
+									<FormattedMessage id="password" defaultMessage="Password"/>
+									</label>
                 </div>
             </div>
           </div>
@@ -34,9 +39,11 @@ export const LoginForm = (props) => {
               onClick={props.loginHandler} 
               disabled={props.loading}
             >
-              Sign in
+							<FormattedMessage id="signIn.btn" defaultMessage="Sign in"/>
             </button>
-            <a href="/register">Don't have an account? Register</a>
+            <a href="/register">
+							<FormattedMessage id="dontHaveAcc" defaultMessage="Don't have an account? Register"/>
+						</a>
           </div>
         </div>
       </div>

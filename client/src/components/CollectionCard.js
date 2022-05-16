@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import { useHttp } from "../hooks/http.hook"
 import { ItemCard } from "./ItemCard"
+import { FormattedMessage } from "react-intl"
 
 
 export const CollectionCard = (props) => {
@@ -30,18 +31,20 @@ export const CollectionCard = (props) => {
     <ul className="collection with-header">
       <li className="collection-header">
         <h2 className="header">"{props.collection.name}"</h2>
-          <p><b>Owner: </b> {props.collection.owner}</p>
-          <p><b>Created:</b> {new Date(props.collection.created).toLocaleDateString()}</p>
-          <p><b>Description: </b> {props.collection.description}</p>
+          <p><b><FormattedMessage id="collectionOwner" defaultMessage="Owner"/>: </b> {props.collection.owner}</p>
+          <p><b><FormattedMessage id="created" defaultMessage="Created: "/></b> {new Date(props.collection.created).toLocaleDateString()}</p>
+          <p><b><FormattedMessage id="description" defaultMessage="Description: "/></b> {props.collection.description}</p>
         <button 
           onClick={()=>document.location =`/collection/${props.collection._id}/add`}
           disabled={loading}
-        >Add item
+        >
+					<FormattedMessage id="addItem.btn" defaultMessage="Add item"/>
         </button>
         <button 
           onClick={()=>{deleteHandler(props.collection._id)}}
           disabled={loading}
-        >Delete Collection
+        >
+					<FormattedMessage id="deleteCollection.btn" defaultMessage="Delete collection"/>
         </button>
       </li>
         {props.items.map(item => {

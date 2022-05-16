@@ -1,3 +1,5 @@
+import {FormattedMessage} from "react-intl"
+
 export const ItemCard = (props) => {
   return(
       <div className="card horizontal ">
@@ -12,15 +14,20 @@ export const ItemCard = (props) => {
 
             <blockquote>
               <p>{props.item.name}</p>
-              <footer>— <cite>{props.item.author || 'Unknown'}</cite></footer>
+              <footer>— <cite>{props.item.author || <FormattedMessage id="unknownAuthor" defaultMessage="Unknown"/>}</cite></footer>
             </blockquote>
 
-            <p>Created: {new Date(props.item.created).toLocaleDateString()}</p>
+            <p>
+						<FormattedMessage id="created" defaultMessage="Created: "/> 
+							{new Date(props.item.created).toLocaleDateString()}
+						</p>
 
           </div>
 					{props.removeItemHandler && 
 						<div className="card-action">
-							<button onClick={()=>{props.removeItemHandler(props.item._id)}}>Delete</button>
+							<button onClick={()=>{props.removeItemHandler(props.item._id)}}>
+							<FormattedMessage id="delete.btn" defaultMessage="Delete"/> 
+							</button>
 						</div>
 					}
         </div>

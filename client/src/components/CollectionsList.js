@@ -3,6 +3,7 @@ import { useHttp } from "../hooks/http.hook"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import { useMessage } from "../hooks/message.hook"
+import {FormattedMessage} from "react-intl"
 
 export const CollectionsList = (props) => {
   const {token} = useContext(AuthContext)
@@ -15,7 +16,7 @@ export const CollectionsList = (props) => {
   }, [error, message, clearError])
 
   if (!props.collections.length){
-    return <p className="center">No collection yet</p>
+    return <p className="center"><FormattedMessage id="noCollections.message" defaultMessage="No Collection yet"/></p>
   }
 
   const deleteHandler = async (collectionId) => {
@@ -31,10 +32,10 @@ export const CollectionsList = (props) => {
     <table>
         <thead>
           <tr>
-              <th>Name of collection</th>
-              <th>Owner</th>
-              <th>Open</th>
-              <th>Delete</th> 
+              <th><FormattedMessage id="nameOfCollection" defaultMessage="Name of collection"/></th>
+              <th><FormattedMessage id="collectionOwner" defaultMessage="Owner"/></th>
+              <th><FormattedMessage id="open.btn" defaultMessage="Open"/></th>
+              <th><FormattedMessage id="delete.btn" defaultMessage="Delete"/></th> 
           </tr>
         </thead>
 
@@ -45,10 +46,14 @@ export const CollectionsList = (props) => {
                 <td>{collection.name}</td>
                 <td>{collection.owner}</td>
                 <td>
-                  <Link to={`/collection/${collection._id}`}>Open</Link>
+                  <Link to={`/collection/${collection._id}`}>
+										<FormattedMessage id="open.btn" defaultMessage="Open"/>
+									</Link>
                 </td>
                 <td>
-                  <button onClick={()=>deleteHandler(collection._id)}>Delete</button>
+                  <button onClick={()=>deleteHandler(collection._id)}>
+										<FormattedMessage id="delete.btn" defaultMessage="Delete"/>
+									</button>
                 </td>
               </tr>
             )

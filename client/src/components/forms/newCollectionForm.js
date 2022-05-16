@@ -1,10 +1,14 @@
+import { FormattedMessage } from "react-intl"
+
 export const NewCollectionForm = (props) => {
   return (
     <div className="row">
       <div className="col s8 offset-s2" style={{paddingTop: '2rem'}}>
         <div className="card blue-grey darken-1">
           <div className="card-content white-text">
-            <span className="card-title">Create new collection</span>
+            <span className="card-title">
+							<FormattedMessage id="createNewCollection" defaultMessage="Create new collection"/>
+						</span>
             <div className="input-field">
               <input 
                 id="name" 
@@ -12,7 +16,9 @@ export const NewCollectionForm = (props) => {
                 name="name"
                 value={props.form.name}  
                 onChange={props.changeHandler} />
-              <label htmlFor="name">Name of Collection</label>
+              <label htmlFor="name">
+								<FormattedMessage id="nameOfCollection" defaultMessage="Name of Collection"/>
+							</label>
             </div>
             <div className="input-field">
               <input 
@@ -21,7 +27,9 @@ export const NewCollectionForm = (props) => {
                 name="description"
                 value={props.form.description}  
                 onChange={props.changeHandler} />
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">
+								<FormattedMessage id="description" defaultMessage="Description"/>
+							</label>
             </div>
           </div>
 
@@ -29,7 +37,7 @@ export const NewCollectionForm = (props) => {
             <button 
             className="btn yellow darken-4"
             onClick={props.createHandler}>
-              Create
+              <FormattedMessage id="create.btn" defaultMessage="Create"/>
             </button>
           </div>
         </div>
